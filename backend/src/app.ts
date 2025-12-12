@@ -12,6 +12,13 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+// CORS - Must be first
+app.use(cors({
+  origin: '*', // Allow all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 // Security Headers
 app.use(helmet());
 
@@ -24,8 +31,6 @@ const limiter = rateLimit({
   max: 100, // Limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
-
-app.use(cors());
 
 app.use(express.json());
 
