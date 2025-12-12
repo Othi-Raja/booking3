@@ -12,6 +12,9 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Trust Vercel Proxy (Required for rate-limit and correct IP detection)
+app.set('trust proxy', 1);
+
 // CORS - Must be first
 app.use(cors({
   origin: '*', // Allow all origins
